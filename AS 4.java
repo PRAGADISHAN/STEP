@@ -1,23 +1,24 @@
-public class SignalStreak {
-    static void findLongestStreak(String signalLog) {
-        char maxChar = signalLog.charAt(0);
-        int maxLen = 1, currLen = 1;
-        for (int i = 1; i < signalLog.length(); i++) {
-            if (signalLog.charAt(i) == signalLog.charAt(i-1)) {
-                currLen++;
-            } else {
-                if (currLen > maxLen) {
-                    maxLen = currLen;
-                    maxChar = signalLog.charAt(i-1);
-                }
-                currLen = 1;
-            }
+public class InventoryBalancer {
+    static void analyzeInventory(int[] sectionA, int[] sectionB) {
+        int totalA = 0, totalB = 0;
+        int maxVal = sectionA[0];
+        String maxLoc = "Section A, Item 1";
+
+        for (int i = 0; i < sectionA.length; i++) {
+            totalA += sectionA[i];
+            if (sectionA[i] > maxVal) { maxVal = sectionA[i]; maxLoc = "Section A, Item " + (i+1); }
         }
-        if (currLen > maxLen) { maxLen = currLen; maxChar = signalLog.charAt(signalLog.length()-1); }
-        System.out.println("Longest Streak: '" + maxChar + "' repeated " + maxLen + " times");
+        for (int i = 0; i < sectionB.length; i++) {
+            totalB += sectionB[i];
+            if (sectionB[i] > maxVal) { maxVal = sectionB[i]; maxLoc = "Section B, Item " + (i+1); }
+        }
+        String status = (totalA == totalB)? "Balanced" : "Not Balanced";
+        System.out.println("Section A Total: " + totalA + " | Section B Total: " + totalB +
+        " | Status: " + status + " | Highest Quantity: " + maxVal + " (" + maxLoc + ")");
     }
     public static void main(String[] args) {
-        findLongestStreak("RRGGGYRR");
-        findLongestStreak("RRRRYYGG");
+        int[] a = {20,15,30};
+        int[] b = {25,10,30};
+        analyzeInventory(a,b);
     }
 }
