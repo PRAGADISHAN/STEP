@@ -6,6 +6,7 @@ public class DuplicatePlayerPickChecker {
                     return "Duplicate Found: " + playerNames[i];
                 }
             }
+            
         }
         return "No Duplicates Found";
     }
